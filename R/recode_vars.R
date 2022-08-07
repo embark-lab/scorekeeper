@@ -45,10 +45,13 @@ recode_vars <- function (raw, scoresheet){
 
 #define function to recode using variables that will be read in from scoresheet. This is the primary function that will recode the data and be put on loop down each row of the scoresheet. This function takes a raw data table (raw_tbl), a new variable name (n_var) and raw variable name (r_var), new value assignments (n_val) and new value labels (n_val_lab), the new varaible label (n_lab), and a second new variable name that will be the 'factor' variable where the variable labels will be presented instead of variable values in each row (n_var_factor).
 
+
+
 recode_function <- function (raw_tbl, n_var, r_var, n_val, n_val_lab, n_lab, n_var_factor) {
   raw_tbl <-raw_tbl %>%
+    mutate({{r_var}} := as.numeric({{r_var}}) ) |>
     #make a new variable using the new variable name, recode the old variable using the new value assignments. get rid of the old value labels that are now incorrect
-    mutate("{n_var}" := recode(!!as.name(r_var), !!!n_val, .keep_value_labels = FALSE)) %>%
+    mutate("{n_var}" := dplyr::recode(!!as.name(r_var), !!!n_val)) %>%
     #relabel values in accordance with the new, correct variable labels
     mutate("{n_var}" := labelled(!!as.name(n_var), n_val_lab)) %>%
     #label the new variable
