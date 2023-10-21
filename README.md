@@ -3,10 +3,6 @@
 
 # scorekeeper
 
-<!-- badges: start -->
-
-[![R-CMD-check](https://github.com/embark-lab/scorekeeper/workflows/R-CMD-check/badge.svg)](https://github.com/embark-lab/scorekeeper/actions)
-<!-- badges: end -->
 
 A data cleaning package, by Katherine Schaumberg
 
